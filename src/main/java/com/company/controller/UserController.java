@@ -48,9 +48,18 @@ public class UserController {
         // sprawdzamy czy jest użytkownik o podany id
         Optional<User> userOpt = UserData.users.stream().filter(user -> user.getUserId() == userId).findFirst();
         if(userOpt.isPresent()){
-            userOpt.get().setRole(role);
+            // userOpt          -> Optional<User>
+            // userOpt.get()    -> User
+            User user = userOpt.get();
+            user.setRole(role);
             return true;
         }
         return false;
+    }
+    public int countActiveUsers(){
+        return 0;
+    }
+    private int countAdmins(){
+        return 0;
     }
 }
