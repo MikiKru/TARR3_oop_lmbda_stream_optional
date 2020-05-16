@@ -3,6 +3,8 @@ package com.company.controller;
 import com.company.data.UserData;
 import com.company.model.User;
 
+import java.util.Optional;
+
 // Klasa kontrolra implementuje metody obsługujące żądania
 public class UserController {
     public void getAllUsers(){
@@ -16,7 +18,15 @@ public class UserController {
         // wersja uproszczona
         UserData.users.forEach(System.out::println);
     }
-    public User getUserById(int userId){
-        return ???
+    public Optional<User> getUserByEmail(String searchEmail){
+        return UserData.users                                       // List<User>
+                .stream()                                           // Stream<User>
+                .filter(user -> user.getEmail().equals(searchEmail))// Stream<User>
+                .findFirst();                                       // Optional<User>
+    }
+    public String getUserByEmailWithValidation(String searchEmail){
+        Optional<User> userOpt = getUserByEmail(searchEmail);
+        return userOpt.map(user -> "Znalezieono użytkownika: " + user.toString())
+                .orElseGet(() -> "Nie znaleziono użytkownika o adresie: " + searchEmail);
     }
 }
