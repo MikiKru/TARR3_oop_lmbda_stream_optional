@@ -4,6 +4,7 @@ import com.company.data.UserData;
 import com.company.model.Role;
 import com.company.model.User;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -61,5 +62,10 @@ public class UserController {
     }
     public int countAdmins(){
         return (int)UserData.users.stream().filter(user -> user.getRole() == Role.ROLE_ADMIN).count();
+    }
+    public List<User> getAllUsersOrderByregistrationDateDesc(){
+        return UserData.users.stream()
+                .sorted(Comparator.comparing(User::getRegistrationDate).reversed())
+                .collect(Collectors.toList());
     }
 }
