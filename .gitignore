@@ -1,0 +1,5 @@
+# wyklucznie pliku
+oop_lambda_expression.iml
+# wykluczenie katologu rekursywnie
+.idea/
+target/
