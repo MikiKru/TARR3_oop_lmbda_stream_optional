@@ -57,9 +57,9 @@ public class UserController {
         return false;
     }
     public int countActiveUsers(){
-        return 0;
+        return (int)UserData.users.stream().filter(User::isStatus).count();
     }
-    private int countAdmins(){
-        return 0;
+    public int countAdmins(){
+        return (int)UserData.users.stream().filter(user -> user.getRole() == Role.ROLE_ADMIN).count();
     }
 }

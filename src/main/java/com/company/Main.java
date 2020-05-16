@@ -18,6 +18,8 @@ public class Main {
         System.out.println(uc.updateUserRoleById(2, Role.ROLE_ADMIN));
         System.out.println(uc.updateUserRoleById(3, Role.ROLE_ADMIN));
         System.out.println(uc.updateUserRoleById(33, Role.ROLE_ADMIN));
+        System.out.println("Liczba aktywnych: " + uc.countActiveUsers());
+        System.out.println("Liczba administratorów: " + uc.countAdmins());
 
     }
 }
