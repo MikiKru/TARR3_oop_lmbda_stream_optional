@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 // ALT + Insert
 // Klasa modelu -> determinuje strukturę danych w projekcie
 public class User {
+    // składowe statyczne klasy -> związane z klasą a nie z obiektem
+    private static int idCounter = 1;
+    private int userId;
     // prywatne pola klasowe ->
     private String name;
     private String lastName;
@@ -14,12 +17,17 @@ public class User {
     // przypisanie uprawnień
     private Role role = Role.ROLE_USER;
     // konstruktor domyślny
-    public User() { }
+    public User() {
+        this.userId = idCounter;
+        idCounter++;
+    }
     // konstruktor z argumentami
     public User(String name,
                 String lastName,
                 String email,
                 String password) {
+        this.userId = idCounter;
+        idCounter++;
         this.name = name;
         this.lastName = lastName;
         this.email = email;
@@ -29,7 +37,8 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "name='" + name + '\'' +
+                "userId=" + userId +
+                ", name='" + name + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
@@ -38,6 +47,7 @@ public class User {
                 ", role=" + role +
                 '}';
     }
+
     // getters & setters -> metody dostępowe do pól klasowych
     public String getName() {
         return name;
