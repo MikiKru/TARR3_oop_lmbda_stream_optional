@@ -68,4 +68,10 @@ public class UserController {
                 .sorted(Comparator.comparing(User::getRegistrationDate).reversed())
                 .collect(Collectors.toList());
     }
+    public List<User> getAllAdminsOrderByEmailAsc(){
+        return UserData.users.stream()
+                .filter(user -> user.getRole() == Role.ROLE_ADMIN)
+                .sorted(Comparator.comparing(User::getEmail))
+                .collect(Collectors.toList());
+    }
 }
