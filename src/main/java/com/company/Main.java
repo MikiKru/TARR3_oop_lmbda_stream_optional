@@ -23,6 +23,7 @@ public class Main {
         uc.getAllUsersOrderByregistrationDateDesc().forEach(System.out::println);
         System.out.println("Administratorzy posortowani:");
         uc.getAllActiveAdminsOrderByEmailAsc().forEach(System.out::println);
-
+        System.out.println("3 pierwszych użytkowników w aplikacji");
+        uc.getFirst3UsersOrderByRegistrationDateAsc().forEach(System.out::println);
     }
 }
