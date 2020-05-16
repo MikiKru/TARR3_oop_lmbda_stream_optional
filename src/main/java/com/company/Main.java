@@ -22,7 +22,7 @@ public class Main {
         System.out.println("Liczba administratorów: " + uc.countAdmins());
         uc.getAllUsersOrderByregistrationDateDesc().forEach(System.out::println);
         System.out.println("Administratorzy posortowani:");
-        uc.getAllAdminsOrderByEmailAsc().forEach(System.out::println);
+        uc.getAllActiveAdminsOrderByEmailAsc().forEach(System.out::println);
 
     }
 }
