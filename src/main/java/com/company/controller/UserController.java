@@ -3,7 +3,9 @@ package com.company.controller;
 import com.company.data.UserData;
 import com.company.model.User;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 // Klasa kontrolra implementuje metody obsługujące żądania
 public class UserController {
@@ -28,5 +30,17 @@ public class UserController {
         Optional<User> userOpt = getUserByEmail(searchEmail);
         return userOpt.map(user -> "Znalezieono użytkownika: " + user.toString())
                 .orElseGet(() -> "Nie znaleziono użytkownika o adresie: " + searchEmail);
+    }
+    public List<User> getAllUsersWithStatus(boolean status){
+        return UserData.users
+                .stream()
+                .filter(user -> user.isStatus() == status)
+                .collect(Collectors.toList());
+    }
+    public void updateUserStatusById(int userId, boolean status){
+        UserData.users
+                .stream()
+                .filter(user -> user.getUserId() == userId)
+                .forEach(user -> user.setStatus(status));
     }
 }
