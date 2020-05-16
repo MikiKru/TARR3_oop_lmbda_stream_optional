@@ -8,8 +8,7 @@ public class SimpleOperations {
     private int [] numbers = {2,-1,34,21,21,1,2,-4,3,5,5,55,3};
 
     public int getMaxValue(){
-        return Arrays.stream(numbers)
-                .max().getAsInt();
+        return Arrays.stream(numbers).max().getAsInt();
     }
     public int getMinValue(){
         return Arrays.stream(numbers)
@@ -23,8 +22,9 @@ public class SimpleOperations {
     public void getElementsGreaterThanAvg(){
         System.out.println("Elementy większe od średniej: " + Arrays.stream(numbers)
                 .filter(number -> number > getAvg())
-                .sorted()
-                .mapToObj(String::valueOf)
+                .mapToObj(Integer::new)
+                .sorted(Comparator.reverseOrder())
+                .map(number -> number.toString())
                 .collect(Collectors.joining(",")));
     }
     public static void main(String[] args) {
