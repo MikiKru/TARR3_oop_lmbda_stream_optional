@@ -4,9 +4,11 @@ import com.company.controller.UserController;
 import com.company.model.Role;
 import com.company.model.User;
 
+import java.security.NoSuchAlgorithmException;
+
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchAlgorithmException {
         UserController uc = new UserController();
         uc.getAllUsers();
         System.out.println(uc.getUserByEmailWithValidation("ak@ak.pl"));
@@ -25,5 +27,6 @@ public class Main {
         uc.getAllActiveAdminsOrderByEmailAsc().forEach(System.out::println);
         System.out.println("3 pierwszych użytkowników w aplikacji");
         uc.getFirst3UsersOrderByRegistrationDateAsc().forEach(System.out::println);
+        uc.printAdmins();
     }
 }

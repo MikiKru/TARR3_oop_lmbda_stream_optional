@@ -4,6 +4,9 @@ import com.company.data.UserData;
 import com.company.model.Role;
 import com.company.model.User;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -79,5 +82,16 @@ public class UserController {
                 .sorted(Comparator.comparing(User::getRegistrationDate))
                 .limit(3)
                 .collect(Collectors.toList());
+    }
+    public void printAdmins() throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        System.out.println(UserData.users
+                .stream()
+                .filter(user -> user.getRole() == Role.ROLE_ADMIN)
+                .map(user -> String.format("| %2d | %20s | %20s | %20s | %20s | %20s |",
+                        user.getUserId(), user.getName(), user.getLastName(), user.getEmail(),
+                        md.digest(user.getPassword().getBytes(StandardCharsets.UTF_8)).toString().replace("[B@",""),
+                        "ADMINISTRATOR"))
+                .collect(Collectors.joining("\n")));
     }
 }
