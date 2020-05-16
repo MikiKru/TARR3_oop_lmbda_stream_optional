@@ -90,7 +90,8 @@ public class UserController {
                 .filter(user -> user.getRole() == Role.ROLE_ADMIN)
                 .map(user -> String.format("| %2d | %20s | %20s | %20s | %20s | %20s |",
                         user.getUserId(), user.getName(), user.getLastName(), user.getEmail(),
-                        md.digest(user.getPassword().getBytes(StandardCharsets.UTF_8)).toString().replace("[B@",""),
+                        md.digest(user.getPassword().getBytes(StandardCharsets.UTF_8))
+                                .toString().replace("[B@",""),
                         "ADMINISTRATOR"))
                 .collect(Collectors.joining("\n")));
     }
