@@ -1,6 +1,7 @@
 package com.company.controller;
 
 import com.company.data.UserData;
+import com.company.model.Role;
 import com.company.model.User;
 
 import java.util.List;
@@ -42,5 +43,8 @@ public class UserController {
                 .stream()
                 .filter(user -> user.getUserId() == userId)
                 .forEach(user -> user.setStatus(status));
+    }
+    public void updateUserRoleById(int userId, Role role){
+        // ???
     }
 }
