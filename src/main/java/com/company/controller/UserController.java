@@ -44,7 +44,13 @@ public class UserController {
                 .filter(user -> user.getUserId() == userId)
                 .forEach(user -> user.setStatus(status));
     }
-    public void updateUserRoleById(int userId, Role role){
-        // ???
+    public boolean updateUserRoleById(int userId, Role role){
+        // sprawdzamy czy jest użytkownik o podany id
+        Optional<User> userOpt = UserData.users.stream().filter(user -> user.getUserId() == userId).findFirst();
+        if(userOpt.isPresent()){
+            userOpt.get().setRole(role);
+            return true;
+        }
+        return false;
     }
 }

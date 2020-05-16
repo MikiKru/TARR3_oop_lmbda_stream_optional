@@ -15,6 +15,9 @@ public class Main {
         uc.updateUserStatusById(4, false);
         System.out.println("Aktywni użytkownicy");
         uc.getAllUsersWithStatus(true).forEach(System.out::println);
+        System.out.println(uc.updateUserRoleById(2, Role.ROLE_ADMIN));
+        System.out.println(uc.updateUserRoleById(3, Role.ROLE_ADMIN));
+        System.out.println(uc.updateUserRoleById(33, Role.ROLE_ADMIN));
 
     }
 }
