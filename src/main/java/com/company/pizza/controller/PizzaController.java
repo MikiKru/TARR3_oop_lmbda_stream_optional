@@ -75,9 +75,28 @@ public class PizzaController {
                 .collect(Collectors.groupingBy(pizza -> pizza.getIngredients().size()))
         );
     }
+    // metoda zwracająca menu | nazwa pizzy | ostra lub łagodna | mięsna lub wege | nazwa_składnika1, ..., nazwa_składnikaN | cena |
+    public String formatedMenu(){
+        return Arrays.stream(Pizza.values())
+                    .map(pizza -> String.format(
+                            "| %15s | %8s | %8s | %5.2f zł | %-100s |",
+                            pizza.getName(),
+                            pizza.getIngredients().stream().anyMatch(Ingredient::isSpicy) ? "ostra" : "łagodna",
+                            pizza.getIngredients().stream().anyMatch(Ingredient::isMeat) ? "mięsna" : "wege",
+                            getPizzaPrice(pizza),
+                            pizza.getIngredients()
+                                    .stream()
+                                    .map(Ingredient::getName)
+                                    .collect(Collectors.joining(","))
+                            )
+                    )
+                    .collect(Collectors.joining("\n"));
+    }
 
     public static void main(String[] args) {
         PizzaController pc = new PizzaController();
+        System.out.println(pc.formatedMenu());
+
         System.out.println("Najtańsza pizza: " + pc.findCheapest());
         System.out.println("Najtańsza pizza ostra: " + pc.findCheapestSpicy());
         System.out.println("Najdroższa pizza wegetariańska to: " + pc.findMostExpensiveVegetarian());
@@ -92,7 +111,7 @@ public class PizzaController {
         System.out.println("Pizze pogrupowane po ilości składników ostrych");
         pc.groupByNumberOfSpicyIngredients()
                 .forEach((key, value) -> System.out.printf("%5d | %s \n", key, value));
-        System.out.println("Pizze pogrupowane po ilości składników, ale tylko większe od 4");
+        System.out.println("Pizze pogrupowane po ilości składników, ale tylko większe od 4 i mniejsze od 7");
         pc.groupByNumberOfIngredientsGreaterThan4()
                 .forEach((key, value) -> System.out.printf("%5d | %s \n", key, value));
     }
