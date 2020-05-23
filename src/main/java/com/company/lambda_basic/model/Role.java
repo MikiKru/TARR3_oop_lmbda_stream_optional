@@ -1,4 +1,4 @@
-package com.company.model;
+package com.company.lambda_basic.model;
 
 public enum Role {
     ROLE_USER,

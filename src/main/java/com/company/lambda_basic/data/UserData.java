@@ -1,6 +1,6 @@
-package com.company.data;
+package com.company.lambda_basic.data;
 
-import com.company.model.User;
+import com.company.lambda_basic.model.User;
 
 import java.util.ArrayList;
 import java.util.Arrays;

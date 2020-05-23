@@ -1,8 +1,7 @@
-package com.company;
+package com.company.lambda_basic;
 
-import com.company.controller.UserController;
-import com.company.model.Role;
-import com.company.model.User;
+import com.company.lambda_basic.controller.UserController;
+import com.company.lambda_basic.model.Role;
 
 import java.security.NoSuchAlgorithmException;
 

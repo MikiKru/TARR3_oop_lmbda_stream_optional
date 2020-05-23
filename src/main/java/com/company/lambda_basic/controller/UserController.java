@@ -1,8 +1,8 @@
-package com.company.controller;
+package com.company.lambda_basic.controller;
 
-import com.company.data.UserData;
-import com.company.model.Role;
-import com.company.model.User;
+import com.company.lambda_basic.data.UserData;
+import com.company.lambda_basic.model.Role;
+import com.company.lambda_basic.model.User;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

@@ -1,4 +1,4 @@
-package com.company.controller;
+package com.company.lambda_basic.controller;
 
 import java.util.Arrays;
 import java.util.Comparator;
