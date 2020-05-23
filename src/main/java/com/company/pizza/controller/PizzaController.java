@@ -9,16 +9,19 @@ import java.util.Comparator;
 // klasa kontrolera -> obsługa żądań i implementacja logiki biznesowej
 public class PizzaController {
     // Wyszukaj i zwróć najtańszą pizze ostrą
-    public Pizza findCheapestSpicy(){
-        return null;
+    public Pizza findCheapestSpicy() {
+        return Arrays.stream(Pizza.values())                                    // Stream<Pizza>
+                .filter(pizza -> pizza.getIngredients()
+                        .stream()
+                        .anyMatch(ingredient -> ingredient.isSpicy()))      // Stream<Pizza>
+                .min(Comparator.comparing(this::getPizzaPrice))     // Stream<Pizza>                                            // Optional<Pizza>
+                .get();
     }
     // Wyszukaj najtańszą pizze
     public Pizza findCheapest(){
-        return Arrays.stream(Pizza.values())                                 // Stream<Pizza>
-                .sorted(Comparator.comparing(pizza -> getPizzaPrice(pizza))) // Stream<Pizza>
-                .limit(1)                                                    // Stream<Pizza>
-                .findFirst()                                                 // Optional<Pizza>
-                .get();                                                      // Pizza
+        return Arrays.stream(Pizza.values())                        // Stream<Pizza>
+                .min(Comparator.comparing(this::getPizzaPrice))     // Stream<Pizza>                                            // Optional<Pizza>
+                .get();                                             // Pizza
     }
     // Metoda zwracająca cenę pizzy podanej w argumencie metody
     public double getPizzaPrice(Pizza pizza){
@@ -31,6 +34,7 @@ public class PizzaController {
     public static void main(String[] args) {
         PizzaController pc = new PizzaController();
         System.out.println("Najtańsza pizza: " + pc.findCheapest());
+        System.out.println("Najtańsza pizza ostra: " + pc.findCheapestSpicy());
 
 //        System.out.println("Najtańsza pizza ostra to: " + pc.findCheapestSpicy());
     }
