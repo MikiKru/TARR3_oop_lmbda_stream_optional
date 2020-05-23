@@ -76,14 +76,16 @@ public class PizzaController {
         );
     }
     // metoda zwracająca menu | nazwa pizzy | ostra lub łagodna | mięsna lub wege | nazwa_składnika1, ..., nazwa_składnikaN | cena |
+    // zaznacz pizze dnia * i obniż jej cenę o 20%
     public String formatedMenu(){
+        Pizza pizzaOfDay = getRandomPizza();
         return Arrays.stream(Pizza.values())
                     .map(pizza -> String.format(
                             "| %15s | %8s | %8s | %5.2f zł | %-100s |",
-                            pizza.getName(),
+                            pizza.equals(pizzaOfDay) ? pizza.getName()+"*" : pizza.getName(),
                             pizza.getIngredients().stream().anyMatch(Ingredient::isSpicy) ? "ostra" : "łagodna",
                             pizza.getIngredients().stream().anyMatch(Ingredient::isMeat) ? "mięsna" : "wege",
-                            getPizzaPrice(pizza),
+                            pizza.equals(pizzaOfDay) ? getPizzaPrice(pizza)*0.8 : getPizzaPrice(pizza),
                             pizza.getIngredients()
                                     .stream()
                                     .map(Ingredient::getName)
@@ -92,11 +94,14 @@ public class PizzaController {
                     )
                     .collect(Collectors.joining("\n"));
     }
+    public Pizza getRandomPizza(){
+        return Pizza.values()[new Random().nextInt(Pizza.values().length)];
+    }
 
     public static void main(String[] args) {
         PizzaController pc = new PizzaController();
         System.out.println(pc.formatedMenu());
-
+        System.out.println(pc.getRandomPizza());
         System.out.println("Najtańsza pizza: " + pc.findCheapest());
         System.out.println("Najtańsza pizza ostra: " + pc.findCheapestSpicy());
         System.out.println("Najdroższa pizza wegetariańska to: " + pc.findMostExpensiveVegetarian());
