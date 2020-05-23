@@ -3,9 +3,7 @@ package com.company.pizza.controller;
 import com.company.pizza.model.Ingredient;
 import com.company.pizza.model.Pizza;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 // klasa kontrolera -> obsługa żądań i implementacja logiki biznesowej
@@ -53,15 +51,26 @@ public class PizzaController {
                                 .count(), Comparator.reverseOrder()))
                         .collect(Collectors.toList());
     }
+    // metoda grupująca pizze po cenie
+    public Map groupByPrice(){
+        return Arrays.stream(Pizza.values())
+                    .collect(Collectors.groupingBy(this::getPizzaPrice));
+    }
 
     public static void main(String[] args) {
         PizzaController pc = new PizzaController();
         System.out.println("Najtańsza pizza: " + pc.findCheapest());
         System.out.println("Najtańsza pizza ostra: " + pc.findCheapestSpicy());
         System.out.println("Najdroższa pizza wegetariańska to: " + pc.findMostExpensiveVegetarian());
+        System.out.println("Pizze mięsne posortowane po ilości składników mięsnych DESC");
         pc.iLikeMeat().forEach(pizza -> System.out.println(
                 pizza + " " +
                 pizza.getIngredients().size() + " " +
                 pizza.getIngredients().stream().filter(Ingredient::isMeat).count()));
+        System.out.println("Pizze pogrupowane po cenie");
+        new TreeMap<>(pc.groupByPrice())
+                .forEach((key, value) -> System.out.printf("%5.1f | %s \n", key, value));
+
+
     }
 }
