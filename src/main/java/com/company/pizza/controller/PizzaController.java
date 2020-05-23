@@ -65,6 +65,16 @@ public class PizzaController {
                             .count())
                     ));
     }
+    // 3 - 2 X
+    // 4 - 2 X
+    // 5 - 1 OK
+    // Grupowanie pizzy po ilości składników, ale zwróć tylko te które mają ich więcej niż 4
+    public TreeMap<Integer, List<Pizza>> groupByNumberOfIngredientsGreaterThan4(){
+        return new TreeMap<Integer, List<Pizza>>(Arrays.stream(Pizza.values())
+                .filter(pizza -> pizza.getIngredients().size() > 4 && pizza.getIngredients().size() < 7)
+                .collect(Collectors.groupingBy(pizza -> pizza.getIngredients().size()))
+        );
+    }
 
     public static void main(String[] args) {
         PizzaController pc = new PizzaController();
@@ -82,6 +92,8 @@ public class PizzaController {
         System.out.println("Pizze pogrupowane po ilości składników ostrych");
         pc.groupByNumberOfSpicyIngredients()
                 .forEach((key, value) -> System.out.printf("%5d | %s \n", key, value));
-
+        System.out.println("Pizze pogrupowane po ilości składników, ale tylko większe od 4");
+        pc.groupByNumberOfIngredientsGreaterThan4()
+                .forEach((key, value) -> System.out.printf("%5d | %s \n", key, value));
     }
 }
