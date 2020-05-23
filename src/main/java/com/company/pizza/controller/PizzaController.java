@@ -57,8 +57,13 @@ public class PizzaController {
                     .collect(Collectors.groupingBy(this::getPizzaPrice));
     }
     // metoda grupujące pizze po liczbie składników ostrych
-    public TreeMap<Integer, List<Pizza>> groupByNumberOfSpicyIngredients(){
-        return null;
+    public TreeMap<Long, List<Pizza>> groupByNumberOfSpicyIngredients(){
+        return new TreeMap<Long, List<Pizza>>(Arrays.stream(Pizza.values())
+                    .collect(Collectors.groupingBy(pizza -> pizza.getIngredients()
+                            .stream()
+                            .filter(Ingredient::isSpicy)
+                            .count())
+                    ));
     }
 
     public static void main(String[] args) {
@@ -74,7 +79,9 @@ public class PizzaController {
         System.out.println("Pizze pogrupowane po cenie");
         new TreeMap<>(pc.groupByPrice())
                 .forEach((key, value) -> System.out.printf("%5.1f | %s \n", key, value));
-
+        System.out.println("Pizze pogrupowane po ilości składników ostrych");
+        pc.groupByNumberOfSpicyIngredients()
+                .forEach((key, value) -> System.out.printf("%5d | %s \n", key, value));
 
     }
 }
