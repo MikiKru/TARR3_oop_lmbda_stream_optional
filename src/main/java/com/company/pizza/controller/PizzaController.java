@@ -56,6 +56,10 @@ public class PizzaController {
         return Arrays.stream(Pizza.values())
                     .collect(Collectors.groupingBy(this::getPizzaPrice));
     }
+    // metoda grupujące pizze po liczbie składników ostrych
+    public TreeMap<Integer, List<Pizza>> groupByNumberOfSpicyIngredients(){
+        return null;
+    }
 
     public static void main(String[] args) {
         PizzaController pc = new PizzaController();
