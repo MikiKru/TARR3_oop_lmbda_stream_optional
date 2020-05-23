@@ -1,9 +1,12 @@
 package com.company.distance_calculator;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 // rozszerzenie Point o składową z
-@Data
+@Getter
+@Setter
 public class Point3D extends Point {
     private Integer z;
 
@@ -13,7 +16,7 @@ public class Point3D extends Point {
     }
     public Point3D(){
         super();
-        this.z = z;
+        this.z = 0;
     }
 
     @Override
